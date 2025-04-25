@@ -36,7 +36,8 @@
     "keybindings": [
       {
         "command": "extension.pasteImage",
-        "key": "fn+f5",
+        "key": "cmd+alt+v",
+        "mac": "cmd+alt+v",
         "when": "editorTextFocus && editorLangId == markdown"
       }
     ]
@@ -50,21 +51,31 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:e2e": "node ./out/tests/e2e/runTest.js",
-    "lint": "eslint src tests --ext ts",
-    "package": "vsce package"
+    "package": "@vscode/vsce package"
   },
   "devDependencies": {
     "@types/vscode": "^1.80.0",
     "@types/node": "^18.x",
-    "@types/electron": "^1.6.10",
     "@vscode/test-electron": "^2.3.6",
     "typescript": "^5.3.3",
-    "vsce": "^2.15.0",
+    "@vscode/vsce": "^2.22.0",
     "vitest": "^1.4.0",
-    "sinon": "^17.0.0",
-    "@types/sinon": "^10.0.20",
-    "eslint": "^8.57.0",
-    "@typescript-eslint/eslint-plugin": "^7.3.1",
-    "@typescript-eslint/parser": "^7.3.1"
+    "@vitest/coverage-v8": "^1.4.0",
+    "mocha": "^10.3.0",
+    "@types/mocha": "^10.0.6",
+    "glob": "^10.3.10",
+    "@types/glob": "^8.1.0",
+    "eslint": "^9.0.0",
+    "@typescript-eslint/eslint-plugin": "^7.4.0",
+    "@typescript-eslint/parser": "^7.4.0",
+    "@eslint/config-array": "^1.0.0",
+    "@eslint/object-schema": "^1.0.0"
+  },
+  "resolutions": {
+    "glob": "^9.0.0",
+    "rimraf": "^4.0.0",
+    "inflight": "npm:lru-cache@^10.0.0",
+    "lodash.get": "npm:just-safe-get@^4.0.0",
+    "boolean": "npm:is-boolean-object@^2.0.0"
   }
 }

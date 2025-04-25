@@ -102,8 +102,12 @@ If the extension fails to save the image, check:
 
 ### Running Tests
 
+The project includes comprehensive unit tests for all components:
+
 ```bash
-npm test
+npm test           # Run all tests
+npm run test:watch # Run tests in watch mode
+npm run test:coverage # Generate coverage report
 ```
 
 ### Building

@@ -57,22 +57,26 @@ async function pasteImage() {
   }
 
   outputChannel.appendLine('Checking clipboard for image...');
-  // Get image from clipboard using Electron API
-  let nativeImage, clipboard;
-  try {
-    const electron = require('electron');
-    nativeImage = electron.nativeImage;
-    clipboard = electron.clipboard;
-  } catch (error) {
-    outputChannel.appendLine(`Error loading Electron APIs: ${error}`);
-    throw new Error('Failed to access clipboard. Electron APIs not available.');
-  }
   
-  const image = clipboard.readImage();
-  if (image.isEmpty()) {
-    throw new Error('No image found in clipboard');
+  // Get image from clipboard using platform-specific implementation
+  let imageBuffer: Buffer;
+  try {
+    const { readImageFromClipboard } = require('./clipboard');
+    const contents = await readImageFromClipboard();
+    
+    if (!contents) {
+      throw new Error('No image found in clipboard');
+    }
+    
+    imageBuffer = contents;
+    outputChannel.appendLine('Image found in clipboard');
+  } catch (error: unknown) {
+    outputChannel.appendLine(`Error reading clipboard: ${error}`);
+    if (error instanceof Error && error.message.includes('pngpaste')) {
+      throw new Error('Please install pngpaste utility: brew install pngpaste');
+    }
+    throw new Error('No image found in clipboard. Please copy an image first.');
   }
-  outputChannel.appendLine('Image found in clipboard');
 
   // Get filename from user with validation
   const filename = await promptForFilename();
@@ -87,7 +91,7 @@ async function pasteImage() {
   }
 
   // Process and save the image
-  const savedImagePath = await saveImage(editor, filename, image);
+  const savedImagePath = await saveImage(editor, filename, imageBuffer);
 
   // Insert markdown link
   await insertMarkdownLink(editor, altText, savedImagePath);
@@ -151,14 +155,15 @@ async function promptForAltText(): Promise<string | undefined> {
  * @param image The native image object
  * @returns The relative path to use in markdown
  */
-async function saveImage(editor: vscode.TextEditor, filename: string, image: any): Promise<string> {
+async function saveImage(editor: vscode.TextEditor, filename: string, imageBuffer: Buffer): Promise<string> {
   // Get current document's directory path
   const mdFile = editor.document.uri.fsPath;
   const mdDir = path.dirname(mdFile);
   
   // Create assets/images directory if it doesn't exist
   const assetsDir = path.join(mdDir, 'assets', 'images');
-  await ensureDirExists(assetsDir);
+  outputChannel.appendLine(`Ensuring directory exists: ${assetsDir}`);
+  mkdirSync(assetsDir, { recursive: true });
   outputChannel.appendLine(`Assets directory ensured: ${assetsDir}`);
 
   // Construct the image file path
@@ -187,8 +192,7 @@ async function saveImage(editor: vscode.TextEditor, filename: string, image: any
 
   // Save image to file
   try {
-    const pngData = image.toPNG();
-    await fs.writeFile(imagePath, pngData);
+    await fs.writeFile(imagePath, imageBuffer);
     outputChannel.appendLine('Image saved successfully');
   } catch (error) {
     outputChannel.appendLine(`Error saving image: ${error}`);
@@ -225,14 +229,17 @@ async function insertMarkdownLink(editor: vscode.TextEditor, altText: string, re
  * @param dirPath Directory path to create
  */
 async function ensureDirExists(dirPath: string): Promise<void> {
-  if (!existsSync(dirPath)) {
-    outputChannel.appendLine(`Creating directory: ${dirPath}`);
-    try {
+  try {
+    if (!existsSync(dirPath)) {
+      outputChannel.appendLine(`Creating directory: ${dirPath}`);
       mkdirSync(dirPath, { recursive: true });
-    } catch (error) {
-      outputChannel.appendLine(`Error creating directory: ${error}`);
-      throw new Error(`Failed to create directory: ${error}`);
+      outputChannel.appendLine(`Directory created: ${dirPath}`);
+    } else {
+      outputChannel.appendLine(`Directory already exists: ${dirPath}`);
     }
+  } catch (error) {
+    outputChannel.appendLine(`Error creating directory: ${error}`);
+    throw new Error(`Failed to create directory: ${error}`);
   }
 }
 
