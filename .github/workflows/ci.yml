@@ -23,13 +23,14 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run compile
-      - run: npm test
+      - run: npm run test:coverage
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           directory: ./coverage
+          files: ./coverage/coverage-final.json
           flags: unittests
           name: codecov-umbrella
           fail_ci_if_error: false
@@ -45,7 +46,8 @@ jobs:
           node-version: 18.x
           cache: 'npm'
       - run: npm ci
-      - run: npm run lint || echo "Linting issues found"
+      - name: Lint code
+        run: npm run lint || echo "Linting issues found but continuing build"
 
   package:
     runs-on: ubuntu-latest

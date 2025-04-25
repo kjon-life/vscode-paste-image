@@ -10,11 +10,12 @@ export default defineConfig({
     exclude: ['**/node_modules/**', '**/out/**'],
     coverage: {
       provider: 'v8',
-      reporter: ['text', 'json', 'html'],
+      reporter: ['text', 'json', 'html', 'json-summary'],
       reportsDirectory: './coverage',
       include: ['src/**/*.ts'],
       exclude: ['**/node_modules/**', '**/tests/**'],
-      all: true
+      all: true,
+      clean: true
     }
   },
   resolve: {
