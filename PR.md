@@ -136,19 +136,30 @@ Tests can be run with:
 
 ## Known Issues
 
-The following npm warnings appear during installation. These are related to dependencies and will be addressed in follow-up issues:
+The following npm warnings appear during installation. Progress has been made on addressing these dependencies:
 
-1. Deprecated packages:
-   - `inflight@1.0.6`: Leaks memory; needs replacement
-   - `@humanwhocodes/config-array@0.13.0`: Should use @eslint/config-array
-   - `rimraf@3.0.2`: Versions prior to v4 not supported
-   - `glob@7.2.3`: Glob versions prior to v9 not supported
-   - `@humanwhocodes/object-schema@2.0.3`: Use @eslint/object-schema
-   - `eslint@8.57.1`: This version no longer supported
-   - `lodash.get@4.4.2`: Use optional chaining instead
-   - `boolean@3.2.0`: Package no longer supported
-   - `vsce@2.15.0`: Renamed to @vscode/vsce
-   - `@types/electron@1.6.12`: Stub types definition, not needed
+✅ FIXED:
+- `vsce@2.15.0`: Replaced with `@vscode/vsce` and package script updated
+- `eslint@8.57.1`: Updated to v9.0.0 with related packages
+- `@humanwhocodes/config-array@0.13.0`: Replaced with @eslint/config-array
+- `@humanwhocodes/object-schema@2.0.3`: Replaced with @eslint/object-schema
+- Added resolutions in package.json for transitive dependencies
+- Added comprehensive test suite for all components
+
+⬜ PENDING (Phase 2):
+- `inflight@1.0.6`: Added to resolutions but need to verify memory leak is fixed
+- `rimraf@3.0.2`: Added to resolutions but need to verify update
+- `glob@7.2.3`: Dependency conflict still needs to be resolved
+- `lodash.get@4.4.2`: Added to resolutions but needs verification
+- `boolean@3.2.0`: Added to resolutions but needs verification
+- Remove unused dependencies:
+  - `@vscode/test-electron`
+  - `@vitest/coverage-v8`
+  - `mocha` and `@types/mocha`
+  - `glob` and `@types/glob`
+- Security vulnerabilities in `esbuild` and `xml2js`
+
+A detailed plan for completing Phase 2 of dependency updates has been created in PHASE2_PLAN.md.
 
 Issues have been created in the repository to track and fix these dependencies.
 
