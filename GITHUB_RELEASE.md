@@ -10,12 +10,12 @@ Follow these steps to create a GitHub Release with the VSIX file:
    - Click the "Create a new release" button (or "Draft a new release")
 
 3. **Fill in the release information**
-   - Tag version: `v0.1.0`
-   - Release title: `VS Code Paste Image v0.1.0`
-   - Description: Copy and paste the content from RELEASE_NOTES.md
+   - Tag version: `v0.1.2`
+   - Release title: `VS Code Paste Image v0.1.2`
+   - Description: Copy and paste the content from RELEASE_NOTES.md for version 0.1.2
 
 4. **Upload the VSIX file**
-   - Drag and drop the `vscode-paste-image-0.1.0.vsix` file into the "Attach binaries" section
+   - Drag and drop the `vscode-paste-image-0.1.2.vsix` file into the "Attach binaries" section
    - Alternatively, click "Upload assets" and select the file
 
 5. **Publish the release**
@@ -41,3 +41,17 @@ You can install the extension in several ways:
 ```
 
 Add this to the README.md in the appropriate section.
+
+## Tagging the Release in Git
+
+To tag the release in git, run the following commands after a successful release:
+
+```bash
+# Create a tag
+git tag -a v0.1.2 -m "Release v0.1.2 - Dependency Cleanup Release"
+
+# Push the tag to the remote repository
+git push origin v0.1.2
+```
+
+This ensures that the commit is properly tagged in the git history.
