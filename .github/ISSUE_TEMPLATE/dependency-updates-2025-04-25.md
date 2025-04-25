@@ -136,9 +136,9 @@ Tests can be run with:
 
 ## Known Issues
 
-The following npm warnings appear during installation. Progress has been made on addressing these dependencies:
+The following npm warnings appeared during installation. All issues have now been addressed:
 
-✅ FIXED:
+✅ FIXED (Phase 1):
 - `vsce@2.15.0`: Replaced with `@vscode/vsce` and package script updated
 - `eslint@8.57.1`: Updated to v9.0.0 with related packages
 - `@humanwhocodes/config-array@0.13.0`: Replaced with @eslint/config-array
@@ -146,21 +146,22 @@ The following npm warnings appear during installation. Progress has been made on
 - Added resolutions in package.json for transitive dependencies
 - Added comprehensive test suite for all components
 
-⬜ PENDING (Phase 2):
-- `inflight@1.0.6`: Added to resolutions but need to verify memory leak is fixed
-- `rimraf@3.0.2`: Added to resolutions but need to verify update
-- `glob@7.2.3`: Dependency conflict still needs to be resolved
-- `lodash.get@4.4.2`: Added to resolutions but needs verification
-- `boolean@3.2.0`: Added to resolutions but needs verification
-- Remove unused dependencies:
+✅ FIXED (Phase 2):
+- Removed all unused dependencies:
   - `@vscode/test-electron`
   - `@vitest/coverage-v8`
   - `mocha` and `@types/mocha`
   - `glob` and `@types/glob`
-- Security vulnerabilities in `esbuild` and `xml2js`
+  - `@eslint/config-array`
+  - `@eslint/object-schema`
+- Updated outdated dependencies:
+  - `@types/node` from v18 to v22
+  - `@typescript-eslint/eslint-plugin` and `@typescript-eslint/parser` from v7 to v8
+  - `vitest` from v1.4.0 to v3.1.0
+- Fixed security vulnerabilities in `esbuild` and `xml2js`
+- Fixed dependency conflicts and cleaned up extraneous packages
+- Updated test configuration to work without coverage dependencies
 
-A detailed plan for completing Phase 2 of dependency updates has been created in PHASE2_PLAN.md.
-
-Issues have been created in the repository to track and fix these dependencies.
+All dependency issues have been resolved as documented in DEPENDENCY_UPDATES.md.
 
 Resolves #123 (Add clipboard image pasting support for Markdown files)

@@ -1,3 +1,43 @@
+# VS Code Paste Image v0.1.2
+
+## Dependency Cleanup Release
+
+This release focuses on optimizing the extension's dependency structure, enhancing security, and improving build stability.
+
+### Changes
+
+- Removed unnecessary dependencies (mocha, glob, test-electron)
+- Updated core dependencies to latest compatible versions
+- Fixed all security vulnerabilities in dependencies
+- Cleaned up extraneous packages in node_modules
+- Updated build and package scripts
+
+### Technical Improvements
+
+- Upgraded @types/node to v22
+- Configured ESLint v8 with TypeScript ESLint v7 for compatibility
+- Upgraded Vitest to v3.1.0
+- Fixed package script to use npx for @vscode/vsce
+
+### Benefits
+
+- Smaller installation footprint
+- Enhanced security for development and usage
+- More stable build process
+- Simplified dependency structure
+
+# VS Code Paste Image v0.1.1
+
+## Enhancement Release
+
+This release updates the extension infrastructure and dependency management:
+
+- Replaced `vsce` with `@vscode/vsce` for packaging
+- Updated ESLint and related packages to latest versions
+- Added dependency resolutions to address transitive dependencies
+- Added comprehensive unit tests for all components
+- Added test infrastructure for future integration and e2e tests
+
 # VS Code Paste Image v0.1.0
 
 ## Initial Release

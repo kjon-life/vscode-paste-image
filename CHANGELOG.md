@@ -2,7 +2,21 @@
 
 All notable changes to the "vscode-paste-image" extension will be documented in this file.
 
-## [0.1.1] - 2025-05-10
+## [0.1.2] - 2025-04-26
+
+### Changed
+- Removed unused dependencies (@vscode/test-electron, @vitest/coverage-v8, mocha, and others)
+- Updated dependencies (@types/node to v22, TypeScript ESLint packages to v7, Vitest to v3)
+- Fixed security vulnerabilities in dependencies
+- Cleaned up extraneous packages
+- Ensured compatibility between ESLint and TypeScript ESLint packages
+
+### Improved
+- Dependency resolution and management
+- Build process stability
+- Test coverage configuration
+
+## [0.1.1] - 2025-04-25
 
 ### Changed
 - Replaced `vsce` with `@vscode/vsce` for packaging

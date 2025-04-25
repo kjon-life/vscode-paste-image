@@ -2,7 +2,7 @@
   "name": "vscode-paste-image",
   "displayName": "Paste Image",
   "description": "Paste clipboard images into Markdown files with automatic link insertion",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "publisher": "kjon-life",
   "private": true,
   "repository": {
@@ -49,27 +49,19 @@
     "pretest": "npm run compile",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage",
+    "test:coverage": "vitest run",
     "test:e2e": "node ./out/tests/e2e/runTest.js",
-    "package": "@vscode/vsce package"
+    "package": "npx @vscode/vsce package"
   },
   "devDependencies": {
     "@types/vscode": "^1.80.0",
-    "@types/node": "^18.x",
-    "@vscode/test-electron": "^2.3.6",
+    "@types/node": "^22.x",
     "typescript": "^5.3.3",
     "@vscode/vsce": "^2.22.0",
-    "vitest": "^1.4.0",
-    "@vitest/coverage-v8": "^1.4.0",
-    "mocha": "^10.3.0",
-    "@types/mocha": "^10.0.6",
-    "glob": "^10.3.10",
-    "@types/glob": "^8.1.0",
-    "eslint": "^9.0.0",
+    "vitest": "^3.1.0",
+    "eslint": "^8.57.0",
     "@typescript-eslint/eslint-plugin": "^7.4.0",
-    "@typescript-eslint/parser": "^7.4.0",
-    "@eslint/config-array": "^1.0.0",
-    "@eslint/object-schema": "^1.0.0"
+    "@typescript-eslint/parser": "^7.4.0"
   },
   "resolutions": {
     "glob": "^9.0.0",

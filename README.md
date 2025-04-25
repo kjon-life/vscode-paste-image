@@ -107,7 +107,7 @@ The project includes comprehensive unit tests for all components:
 ```bash
 npm test           # Run all tests
 npm run test:watch # Run tests in watch mode
-npm run test:coverage # Generate coverage report
+npm run test:coverage # Run tests with additional logs
 ```
 
 ### Building

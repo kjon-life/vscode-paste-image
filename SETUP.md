@@ -44,7 +44,12 @@ npm run compile
 npm test
 ```
 
-5. Package the extension:
+5. Run security audit:
+```bash
+npm audit
+```
+
+6. Package the extension:
 ```bash
 npm run package
 ```
