@@ -5,23 +5,21 @@ import { electron, useEmptyClipboard, useClipboardWithImage, resetElectronMocks 
 import { fs, resetFileSystem, markPathAsExisting } from './mocks/fs.mock';
 
 // Mock the VS Code module
-vi.mock('vscode', () => vscode, { virtual: true });
+vi.mock('vscode', () => vscode);
 
 // Mock Node.js modules
 vi.mock('fs/promises', () => fs.promises);
 vi.mock('fs', () => fs);
-vi.mock('path', async () => {
-  const actual = await vi.importActual('path');
+vi.mock('path', () => {
   return {
-    ...actual,
-    // Override specific path functions if needed
+    ...vi.importActual('path'),
     join: (...parts: string[]) => parts.join('/'),
     dirname: (p: string) => p.substring(0, p.lastIndexOf('/')),
   };
 });
 
 // Mock the electron module to use our mock
-vi.mock('electron', () => electron, { virtual: true });
+vi.mock('electron', () => electron);
 
 // Import our extension after setting up mocks
 let activateFn: Function;
@@ -66,8 +64,8 @@ describe('Paste Image Extension', () => {
     activateFn(context);
     
     // Verify the command was registered
-    expect(vscode.commands.registerCommand.called).toBe(true);
-    expect(vscode.commands.registerCommand.args[0][0]).toBe('extension.pasteImage');
+    expect(vscode.commands.registerCommand).toHaveBeenCalled();
+    expect(vscode.commands.registerCommand.firstCall.args[0]).toBe('extension.pasteImage');
   });
 
   it('should show error when no active editor', async () => {
@@ -79,14 +77,14 @@ describe('Paste Image Extension', () => {
     activateFn(context);
     
     // Get the command function
-    const commandFn = vscode.commands.registerCommand.args[0][1];
+    const commandFn = vscode.commands.registerCommand.firstCall.args[1];
     
     // Execute the command function
     await commandFn();
     
     // Verify error message was shown
-    expect(vscode.window.showErrorMessage.called).toBe(true);
-    expect(vscode.window.showErrorMessage.args[0][0]).toContain('No active editor');
+    expect(vscode.window.showErrorMessage).toHaveBeenCalled();
+    expect(vscode.window.showErrorMessage.firstCall.args[0]).toContain('No active editor');
   });
 
   it('should show error when active file is not markdown', async () => {
@@ -100,14 +98,14 @@ describe('Paste Image Extension', () => {
     activateFn(context);
     
     // Get the command function
-    const commandFn = vscode.commands.registerCommand.args[0][1];
+    const commandFn = vscode.commands.registerCommand.firstCall.args[1];
     
     // Execute the command function
     await commandFn();
     
     // Verify error message was shown
-    expect(vscode.window.showErrorMessage.called).toBe(true);
-    expect(vscode.window.showErrorMessage.args[0][0]).toContain('not a Markdown file');
+    expect(vscode.window.showErrorMessage).toHaveBeenCalled();
+    expect(vscode.window.showErrorMessage.firstCall.args[0]).toContain('not a Markdown file');
   });
 
   it('should show error when no image in clipboard', async () => {
@@ -122,14 +120,14 @@ describe('Paste Image Extension', () => {
     activateFn(context);
     
     // Get the command function
-    const commandFn = vscode.commands.registerCommand.args[0][1];
+    const commandFn = vscode.commands.registerCommand.firstCall.args[1];
     
     // Execute the command function
     await commandFn();
     
     // Verify error message was shown
-    expect(vscode.window.showErrorMessage.called).toBe(true);
-    expect(vscode.window.showErrorMessage.args[0][0]).toContain('No image found in clipboard');
+    expect(vscode.window.showErrorMessage).toHaveBeenCalled();
+    expect(vscode.window.showErrorMessage.firstCall.args[0]).toContain('No image found in clipboard');
   });
 
   it('should handle workflow correctly when image is in clipboard', async () => {
@@ -151,24 +149,24 @@ describe('Paste Image Extension', () => {
     activateFn(context);
     
     // Get the command function
-    const commandFn = vscode.commands.registerCommand.args[0][1];
+    const commandFn = vscode.commands.registerCommand.firstCall.args[1];
     
     // Execute the command function
     await commandFn();
     
     // Verify directory creation
-    expect(fs.mkdirSync.called).toBe(true);
+    expect(fs.mkdirSync).toHaveBeenCalled();
     
     // Verify image was saved
-    expect(fs.promises.writeFile.called).toBe(true);
-    expect(fs.promises.writeFile.args[0][0]).toContain('test-image.png');
+    expect(fs.promises.writeFile).toHaveBeenCalled();
+    expect(fs.promises.writeFile.firstCall.args[0]).toContain('test-image.png');
     
     // Verify markdown link was inserted
-    expect(editor.edit.called).toBe(true);
+    expect(editor.edit).toHaveBeenCalled();
     
     // Verify success message
-    expect(vscode.window.showInformationMessage.called).toBe(true);
-    expect(vscode.window.showInformationMessage.args[0][0]).toContain('test-image.png');
+    expect(vscode.window.showInformationMessage).toHaveBeenCalled();
+    expect(vscode.window.showInformationMessage.firstCall.args[0]).toContain('test-image.png');
   });
 
   it('should handle file overwrite confirmation', async () => {
@@ -190,16 +188,16 @@ describe('Paste Image Extension', () => {
     activateFn(context);
     
     // Get the command function
-    const commandFn = vscode.commands.registerCommand.args[0][1];
+    const commandFn = vscode.commands.registerCommand.firstCall.args[1];
     
     // Execute the command function
     await commandFn();
     
     // Verify warning was shown
-    expect(vscode.window.showWarningMessage.called).toBe(true);
+    expect(vscode.window.showWarningMessage).toHaveBeenCalled();
     
     // Verify image was still saved
-    expect(fs.promises.writeFile.called).toBe(true);
+    expect(fs.promises.writeFile).toHaveBeenCalled();
   });
 
   it('should cancel when user rejects overwrite', async () => {
@@ -221,17 +219,17 @@ describe('Paste Image Extension', () => {
     activateFn(context);
     
     // Get the command function
-    const commandFn = vscode.commands.registerCommand.args[0][1];
+    const commandFn = vscode.commands.registerCommand.firstCall.args[1];
     
     // Execute the command function
     await commandFn();
     
     // Verify warning was shown
-    expect(vscode.window.showWarningMessage.called).toBe(true);
+    expect(vscode.window.showWarningMessage).toHaveBeenCalled();
     
     // Verify error message was shown
-    expect(vscode.window.showErrorMessage.called).toBe(true);
-    expect(vscode.window.showErrorMessage.args[0][0]).toContain('file already exists');
+    expect(vscode.window.showErrorMessage).toHaveBeenCalled();
+    expect(vscode.window.showErrorMessage.firstCall.args[0]).toContain('file already exists');
   });
 
   it('should properly clean up on deactivation', () => {

@@ -2,7 +2,7 @@
 
 All notable changes to the "vscode-paste-image" extension will be documented in this file.
 
-## [0.1.0] - 2023-04-25
+## [0.1.0] - 2025-04-25
 
 ### Added
 - Initial release

@@ -4,7 +4,7 @@ import { vscode, MockFactory } from './mocks/vscode.mock';
 import { fs, resetFileSystem } from './mocks/fs.mock';
 
 // Mock the VS Code module
-vi.mock('vscode', () => vscode, { virtual: true });
+vi.mock('vscode', () => vscode);
 
 // Mock Node.js modules
 vi.mock('fs/promises', () => fs.promises);
@@ -44,7 +44,7 @@ describe('Utility Functions', () => {
     extension.activate(context);
     
     // Get the command function (we don't actually need to call it for this test)
-    const commandFn = vscode.commands.registerCommand.args[0][1];
+    const commandFn = vscode.commands.registerCommand.firstCall.args[1];
     
     // We're verifying that Windows backslashes get properly converted to forward slashes
     // This is done in the saveImage function when it returns the relative path

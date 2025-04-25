@@ -53,7 +53,7 @@ A lightweight extension that enables pasting clipboard images directly into Mark
 
 ### From VSIX File
 
-1. Download the `.vsix` file from the [Releases](https://github.com/your-org/vscode-paste-image/releases) page
+1. Download the `.vsix` file from the [Releases](https://github.com/kjon-life/vscode-paste-image/releases/latest) page
 2. In VS Code, go to Extensions view (Ctrl/Cmd+Shift+X)
 3. Click the `...` menu (top-right) and select `Install from VSIX...`
 4. Locate and select the downloaded `.vsix` file
