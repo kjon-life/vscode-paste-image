@@ -102,13 +102,36 @@ If the extension fails to save the image, check:
 
 ### Running Tests
 
-The project includes comprehensive unit tests for all components:
+The project includes unit, integration, and E2E tests:
 
 ```bash
 npm test           # Run all tests
 npm run test:watch # Run tests in watch mode
-npm run test:coverage # Run tests with additional logs
+npm run test:coverage # Run tests with coverage report
 ```
+
+Current test coverage:
+- Overall: 19.47% statement coverage
+- clipboard.ts: 86.84%
+- settings.ts: 100%
+- extension.ts: 12.73% (in progress)
+
+### Test Coverage
+
+To generate a test coverage report:
+
+```bash
+npm run test:coverage
+```
+
+This will run all tests and generate a coverage report showing which parts of the codebase are covered by tests. The report includes:
+
+- Statement coverage: percentage of statements executed
+- Branch coverage: percentage of control branches executed 
+- Function coverage: percentage of functions called
+- Line coverage: percentage of executable lines executed
+
+We aim to achieve at least 80% coverage for all modules.
 
 ### Building
 

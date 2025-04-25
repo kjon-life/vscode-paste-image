@@ -49,19 +49,20 @@
     "pretest": "npm run compile",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:coverage": "vitest run",
+    "test:coverage": "vitest run --coverage",
     "test:e2e": "node ./out/tests/e2e/runTest.js",
     "package": "npx @vscode/vsce package"
   },
   "devDependencies": {
-    "@types/vscode": "^1.80.0",
     "@types/node": "^22.x",
-    "typescript": "^5.3.3",
-    "@vscode/vsce": "^2.22.0",
-    "vitest": "^3.1.0",
-    "eslint": "^8.57.0",
+    "@types/vscode": "^1.80.0",
     "@typescript-eslint/eslint-plugin": "^7.4.0",
-    "@typescript-eslint/parser": "^7.4.0"
+    "@typescript-eslint/parser": "^7.4.0",
+    "@vitest/coverage-v8": "3.1.2",
+    "@vscode/vsce": "^2.22.0",
+    "eslint": "^8.57.0",
+    "typescript": "^5.3.3",
+    "vitest": "^3.1.0"
   },
   "resolutions": {
     "glob": "^9.0.0",

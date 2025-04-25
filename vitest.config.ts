@@ -8,6 +8,14 @@ export default defineConfig({
     testTimeout: 10000,
     include: ['tests/**/*.test.ts'],
     exclude: ['**/node_modules/**', '**/out/**'],
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'json', 'html'],
+      reportsDirectory: './coverage',
+      include: ['src/**/*.ts'],
+      exclude: ['**/node_modules/**', '**/tests/**'],
+      all: true
+    }
   },
   resolve: {
     alias: {
