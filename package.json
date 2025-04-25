@@ -1,0 +1,70 @@
+{
+  "name": "vscode-paste-image",
+  "displayName": "Paste Image",
+  "description": "Paste clipboard images into Markdown files with automatic link insertion",
+  "version": "0.1.0",
+  "publisher": "kjon-life",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kjon-life/vscode-paste-image.git"
+  },
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "markdown",
+    "image",
+    "paste",
+    "clipboard",
+    "screenshot"
+  ],
+  "activationEvents": [
+    "onCommand:extension.pasteImage"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.pasteImage",
+        "title": "Paste Image and Insert Markdown Link"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "extension.pasteImage",
+        "key": "fn+f5",
+        "when": "editorTextFocus && editorLangId == markdown"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:e2e": "node ./out/tests/e2e/runTest.js",
+    "lint": "eslint src tests --ext ts",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.80.0",
+    "@types/node": "^18.x",
+    "@types/electron": "^1.6.10",
+    "@vscode/test-electron": "^2.3.6",
+    "typescript": "^5.3.3",
+    "vsce": "^2.15.0",
+    "vitest": "^1.4.0",
+    "sinon": "^17.0.0",
+    "@types/sinon": "^10.0.20",
+    "eslint": "^8.57.0",
+    "@typescript-eslint/eslint-plugin": "^7.3.1",
+    "@typescript-eslint/parser": "^7.3.1"
+  }
+}
