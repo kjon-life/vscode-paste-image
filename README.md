@@ -24,7 +24,7 @@ A VS Code extension to paste clipboard images directly into Markdown files. Curr
 
 ## How It Works
 
-1. Capture image data from the OS clipboard via Electron's `nativeImage` API
+1. Capture image data from the OS clipboard
 2. Prompt user for a filename (no extension) and alt-text
 3. Create (if missing) an `assets/images/` folder alongside the current Markdown file
 4. Save the clipboard image as PNG in that folder
