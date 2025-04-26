@@ -10,12 +10,19 @@ export default defineConfig({
     exclude: ['**/node_modules/**', '**/out/**'],
     coverage: {
       provider: 'v8',
-      reporter: ['text', 'json', 'html', 'json-summary'],
+      reporter: ['text', 'json', 'html', 'lcov', 'json-summary', 'cobertura'],
       reportsDirectory: './coverage',
       include: ['src/**/*.ts'],
       exclude: ['**/node_modules/**', '**/tests/**'],
       all: true,
-      clean: true
+      clean: true,
+      reportOnFailure: true,
+      thresholds: {
+        lines: 0,
+        functions: 0,
+        branches: 0,
+        statements: 0
+      }
     }
   },
   resolve: {

@@ -15,18 +15,25 @@ jobs:
         node-version: [18.x]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - run: npm ci
-      - run: npm run compile
-      - run: npm run test:coverage
-
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Compile
+        run: npm run compile
+      
+      - name: Run tests with coverage
+        run: npm run test:coverage
+      
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           directory: ./coverage
@@ -34,18 +41,23 @@ jobs:
           flags: unittests
           name: codecov-umbrella
           fail_ci_if_error: false
+          verbose: true
 
   lint:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      
       - name: Use Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18.x
           cache: 'npm'
-      - run: npm ci
+      
+      - name: Install dependencies
+        run: npm ci
+      
       - name: Lint code
         run: npm run lint || echo "Linting issues found but continuing build"
 
@@ -54,17 +66,25 @@ jobs:
     needs: [build, lint]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      
       - name: Use Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18.x
           cache: 'npm'
-      - run: npm ci
-      - run: npm run compile
-      - run: npm run package
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Compile
+        run: npm run compile
+      
+      - name: Package extension
+        run: npm run package
+      
       - name: Upload VSIX as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: vscode-paste-image
           path: "*.vsix"
