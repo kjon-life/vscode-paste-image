@@ -2,8 +2,9 @@
   "name": "vscode-paste-image",
   "displayName": "Paste Image",
   "description": "Paste clipboard images into Markdown files with automatic link insertion",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "publisher": "kjon-life",
+  "icon": "resources/images/bull.png",
   "private": true,
   "repository": {
     "type": "git",

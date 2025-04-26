@@ -2,6 +2,16 @@
 
 All notable changes to the "vscode-paste-image" extension will be documented in this file.
 
+## [0.1.4] - 2025-04-26
+
+### Added
+- Extension icon (logo)
+- Signature in README
+
+### Changed
+- Fixed markdown syntax display in documentation
+- Improved README formatting and appearance
+
 ## [0.1.3] - 2025-04-26
 
 ### Added

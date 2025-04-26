@@ -1,3 +1,16 @@
+# VS Code Paste Image v0.1.4
+
+## Visual Enhancement Release
+
+Improved visual appearance and formatting of the documents:
+
+### Added
+- Extension icon
+- "Made with love" signature in README
+
+### Documentation Improvements
+- Modified markdown syntax display in documentation
+
 # VS Code Paste Image v0.1.3
 
 ## CI and Coverage Reporting Release
