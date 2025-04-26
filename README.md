@@ -12,15 +12,15 @@
 [![GitHub stars](https://img.shields.io/github/stars/kjon-life/vscode-paste-image)](https://github.com/kjon-life/vscode-paste-image/stargazers)
 [![GitHub issues](https://img.shields.io/github/issues/kjon-life/vscode-paste-image)](https://github.com/kjon-life/vscode-paste-image/issues)
 
-A lightweight extension that enables pasting clipboard images directly into Markdown files with zero third-party dependencies. Works across all VS Code flavors including VS Code, Codium, and Cursor.
+A VS Code extension to paste clipboard images directly into Markdown files. Currently fully supported on macOS Sequoia, with Windows and Linux support under development.
 
 ## Features
 
-- **Zero Dependencies**: Uses only built-in VS Code and Electron APIs
-- **Fast Workflow**: Sub-1 second operation from paste to insert
-- **Cross-Platform**: Works on macOS, Windows, and Linux
-- **Editor Compatibility**: Compatible with VS Code, Codium, and Cursor
-- **Simple UX**: Just two prompts (filename and alt-text) for complete operation
+- **Smart Asset Management**: Automatically creates and manages `assets/images` folders
+- **Accessibility Focus**: Prompts for descriptive alt text
+- **Fast Workflow**: Quick paste-to-markdown workflow
+- **Local Storage**: Saves images as PNGs in your project structure
+- **Detailed Logging**: Built-in logging for troubleshooting
 
 ## How It Works
 
@@ -30,26 +30,6 @@ A lightweight extension that enables pasting clipboard images directly into Mark
 4. Save the clipboard image as PNG in that folder
 5. Insert a Markdown image link (`![alt-text](assets/images/name.png)`) at the cursor
 
-## Usage
-
-1. Copy an image to your clipboard:
-   - Take a screenshot
-   - Copy an image from another application
-   - Use your OS screenshot tool (e.g., ⌘+Shift+4 on macOS, Win+Shift+S on Windows)
-
-2. In a Markdown file, either:
-   - Press the default keybinding `Fn+F5` 
-   - Use the command palette (Ctrl/Cmd+Shift+P) and search for `Paste Image and Insert Markdown Link`
-
-3. Enter a filename when prompted (without extension)
-
-4. Enter alt-text when prompted (for accessibility)
-
-5. The image will be:
-   - Saved as a PNG in the `assets/images/` directory (created if it doesn't exist)
-   - Linked automatically at your cursor position with proper Markdown syntax
-
-## Installation
 
 ### From VSIX File
 
@@ -59,7 +39,10 @@ A lightweight extension that enables pasting clipboard images directly into Mark
 4. Locate and select the downloaded `.vsix` file
 
 ### From Source
-
+On macOS
+```bash
+brew install pngpaste
+```
 1. Clone the repository
 2. Run `npm install` (or your preferred package manager)
 3. Run `npm run package` to build the VSIX file
@@ -69,36 +52,52 @@ A lightweight extension that enables pasting clipboard images directly into Mark
 
 - VS Code 1.80.0 or higher (or compatible editor)
 
-## Extension Settings
+## Usage
 
-This extension currently has no configurable settings, but future versions may include:
+1. Copy an image to your clipboard:
+   - Take a screenshot (`Cmd+Shift+4` on macOS)
+   - Copy an image from any application
 
-- Custom image format options (PNG, JPG, WebP)
-- Custom asset directory path
-- Default alt-text templates
-- Image resize options
+2. In a Markdown file:
+   - Press `Cmd+Alt+V` (macOS)
+   - Or use command palette (`Cmd+Shift+P`): "Paste Image and Insert Markdown Link"
 
-## Troubleshooting
+3. When prompted:
+   - Enter a filename (alphanumeric, hyphens, underscores)
+   - Provide alt text for accessibility
 
-### No Image in Clipboard
+4. The extension will:
+   - Create `assets/images` if needed
+   - Save the image as PNG
+   - Insert a Markdown link at your cursor:
+     ```markdown
+     ![Your alt text](assets/images/your-filename.png)
+     ```
 
-If you receive an error stating "No image found in clipboard", make sure:
-1. You've copied an actual image, not just text or a file
-2. Your clipboard contains a valid image format
-3. Try copying the image again from the source
+## Technical Details
 
-### Permission Issues
+### Project Structure
+```
+src/
+  ├── extension.ts   # Main extension logic
+  └── clipboard.ts   # Platform-specific clipboard handling
+```
 
-If the extension fails to save the image, check:
-1. You have write permissions to the directory
-2. The path doesn't contain special characters that might cause issues
+### Tech Stack
+- TypeScript
+- VS Code Extension API
+- Vitest for testing
+- Platform utilities (pngpaste)
 
-## Development
+### Development Setup
 
 1. Clone the repository
-2. Run `npm install`
-3. Open the project in VS Code
-4. Press F5 to start debugging in Extension Development Host
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Open in VS Code
+4. Press F5 to start debugging
 
 ### Running Tests
 
@@ -116,34 +115,41 @@ Current test coverage:
 - settings.ts: 100%
 - extension.ts: 12.73% (in progress)
 
-### Test Coverage
-
-To generate a test coverage report:
-
-```bash
-npm run test:coverage
-```
-
-This will run all tests and generate a coverage report showing which parts of the codebase are covered by tests. The report includes:
-
-- Statement coverage: percentage of statements executed
-- Branch coverage: percentage of control branches executed 
-- Function coverage: percentage of functions called
-- Line coverage: percentage of executable lines executed
-
-We aim to achieve at least 80% coverage for all modules.
-
 ### Building
-
-To build the VSIX package:
 
 ```bash
 npm run package
 ```
 
+## Known Limitations
+
+- Full functionality currently on macOS only
+- PNG format only
+- Single image paste at a time
+- Document must be saved before pasting
+- Filenames limited to alphanumeric, hyphens, underscores
+
+## Troubleshooting
+
+### No Image Found
+If you get "No image found in clipboard":
+1. Verify you've copied an image
+2. Try copying again
+3. Check if `pngpaste` is installed (macOS)
+
+### Permission Issues
+If image saving fails:
+1. Check write permissions
+2. Ensure document is saved
+3. Verify `assets/images` isn't write-protected
+
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Active areas for contribution:
+- Windows implementation
+- Linux implementation
+- Additional image format support
+- Test coverage improvements
 
 ## License
 
