@@ -12,30 +12,36 @@
 [![GitHub stars](https://img.shields.io/github/stars/kjon-life/vscode-paste-image)](https://github.com/kjon-life/vscode-paste-image/stargazers)
 [![GitHub issues](https://img.shields.io/github/issues/kjon-life/vscode-paste-image)](https://github.com/kjon-life/vscode-paste-image/issues)
 
-A VS Code extension to paste clipboard images directly into Markdown files. Currently fully supported on macOS Sequoia, with Windows and Linux support under development.
+A VS Code extension to paste clipboard images directly into Markdown files. Currently fully supported on macOS Sequoia, and tested in VS Code, VSCodium, and Cursor IDE.
 
 ## Features
 
 - **Smart Asset Management**: Automatically creates and manages `assets/images` folders
 - **Accessibility Focus**: Prompts for descriptive alt text
 - **Fast Workflow**: Quick paste-to-markdown workflow
-- **Local Storage**: Saves images as PNGs in your project structure
+- **Local Storage**: Saves images as PNGs in the project structure
 - **Detailed Logging**: Built-in logging for troubleshooting
 
 ## How It Works
 
-1. Capture image data from the OS clipboard
+1. Capture image data from the macOS clipboard
 2. Prompt user for a filename (no extension) and alt-text
 3. Create (if missing) an `assets/images/` folder alongside the current Markdown file
 4. Save the clipboard image as PNG in that folder
-5. Insert a Markdown image link (`![alt-text](assets/images/name.png)`) at the cursor
+5. Insert a Markdown image link (`!\[alt-text\]\(assets/images/name.png\)`) at the cursor
 
+## Installation
+On macOS
+```bash
+brew install pngpaste
+```
 
 ### From VSIX File
 
 1. Download the `.vsix` file from the [Releases](https://github.com/kjon-life/vscode-paste-image/releases/latest) page
-2. In VS Code, go to Extensions view (Ctrl/Cmd+Shift+X)
-3. Click the `...` menu (top-right) and select `Install from VSIX...`
+2. In VS Code, VSCodium, or Cursor IDE,:
+    - ⇧⌘P `Extensions: Install from VSIX...`
+3. Click the `...` menu (top-right of the extension view) and select `Install from VSIX...`
 4. Locate and select the downloaded `.vsix` file
 
 ### From Source
@@ -71,7 +77,7 @@ brew install pngpaste
    - Save the image as PNG
    - Insert a Markdown link at your cursor:
      ```markdown
-     ![Your alt text](assets/images/your-filename.png)
+     !\[the alt text\]\(assets/images/your-filename.png\)
      ```
 
 ## Technical Details
@@ -154,3 +160,10 @@ Active areas for contribution:
 ## License
 
 MIT
+
+---
+
+<div align="center">
+Made with ❤️ by <a href="https://github.com/kjon-life">kjon-life</a>
+</div>
+

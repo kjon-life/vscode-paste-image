@@ -13,7 +13,7 @@
 - Prompt user for a filename (no extension) and alt-text.
 - Create (if missing) an `assets/images/` folder alongside the current Markdown file.
 - Save the clipboard image as PNG in that folder.
-- Insert a Markdown image link (`![alt-text](assets/images/name.png)`) at the cursor.
+- Insert a Markdown image link (`!\[alt-text\]\(assets/images/name.png\)`) at the cursor.
 
 ### Non-Functional Requirements
 - Cross-platform support: macOS, Windows, Linux.
