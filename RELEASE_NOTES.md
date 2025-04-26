@@ -1,3 +1,24 @@
+# VS Code Paste Image v0.1.3
+
+## CI and Coverage Reporting Release
+
+This release focuses on improving the continuous integration and test coverage reporting:
+
+### Added
+- Codecov integration for test coverage reporting
+- Improved GitHub Actions workflow configuration
+- Updated badges in README.md for better project status visibility
+
+### Technical Improvements
+- Updated GitHub Actions to v4
+- Configured Codecov for accurate coverage reporting
+- Improved test coverage reporting and visualization
+
+### Benefits
+- Better visibility into test coverage
+- More reliable CI pipeline
+- Enhanced project quality metrics
+
 # VS Code Paste Image v0.1.2
 
 ## Dependency Cleanup Release

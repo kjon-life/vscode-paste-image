@@ -2,6 +2,17 @@
 
 All notable changes to the "vscode-paste-image" extension will be documented in this file.
 
+## [0.1.3] - 2025-04-26
+
+### Added
+- Improved CI workflow configuration
+- Added Codecov integration for test coverage reporting
+- Updated badges in README.md
+
+### Changed
+- Updated GitHub Actions workflow to use latest versions
+- Configured Codecov for better test coverage visibility
+
 ## [0.1.2] - 2025-04-26
 
 ### Changed
